@@ -2,11 +2,11 @@
   <md-app>
 
     <md-app-toolbar class="md-primary">
-      <toolbar-content/>
+      <span class="md-title">Charisms</span>
     </md-app-toolbar>
 
-    <md-app-drawer md-permanent="full">
-      <drawer-content/>
+    <md-app-drawer md-permanent="clipped">
+      Drawer Content
     </md-app-drawer>
 
     <md-app-content>
@@ -17,14 +17,7 @@
 </template>
 
 <script>
-  import DrawerContent from './components/DrawerContent'
-  import ToolbarContent from './components/ToolbarContent'
-
   export default {
-    components: {
-      ToolbarContent,
-      DrawerContent
-    }
   }
 </script>
 
