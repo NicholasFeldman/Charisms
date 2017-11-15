@@ -3,8 +3,6 @@
     <p v-for="quote in quotes">
       {{quote}}
     </p>
-
-    <md-button class="md-raised md-accent">Test</md-button>
   </div>
 </template>
 
