@@ -6,7 +6,12 @@
     </md-app-toolbar>
 
     <md-app-drawer md-permanent="clipped">
-      Drawer Content
+      <md-list>
+        <md-list-item to="/">
+          <md-icon>list</md-icon>
+          <span class="md-list-item-text">Quotes</span>
+        </md-list-item>
+      </md-list>
     </md-app-drawer>
 
     <md-app-content>
