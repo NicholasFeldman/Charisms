@@ -1,5 +1,13 @@
 <template>
   <div>
+
+    <md-tabs md-alignment="fixed">
+      <md-tab id="tab-quotes-all"   md-icon="list"     md-label="All"/>
+      <md-tab id="tab-quotes-mine"  md-icon="face"     md-label="Mine"/>
+      <md-tab id="tab-quotes-liked" md-icon="favorite" md-label="Favorites"/>
+
+    </md-tabs>
+
     <md-card v-for="quote in quotes">
       <md-card-header>
         <div class="md-title">{{quote.sayer}}</div>
@@ -16,6 +24,7 @@
         </md-button>
       </md-card-actions>
     </md-card>
+
   </div>
 </template>
 
@@ -28,6 +37,9 @@
     name: 'quotes-pane',
     firebase: {
       quotes: quotesRef
+        // .orderByChild('sayer')
+        // .equalTo('nick')
+        // .limitToFirst(25)
     }
   }
 </script>

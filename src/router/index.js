@@ -8,6 +8,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/quotes'
+    },
+    {
+      path: '/quotes/:filter?',
       name: 'Quotes',
       component: QuotesPane
     }
