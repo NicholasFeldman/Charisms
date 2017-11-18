@@ -43,6 +43,10 @@
 <script>
   import { required, minLength } from 'vuelidate/lib/validators'
 
+  import db from '../firebase'
+
+  const quotesRef = db.ref('/quotes')
+
   export default {
     name: 'new-quote-dialog',
     data: () => ({
@@ -94,10 +98,13 @@
           this.submit()
         }
       },
-      submit () { // TODO
-        console.log(this.form.sayer)
-        console.log(this.form.title)
-        console.log(this.form.quote)
+      submit () {
+        quotesRef.push({
+          sayer: this.form.sayer,
+          title: this.form.title,
+          quote: this.form.quote
+        })
+        this.cancel()
       }
     }
   }
