@@ -10,7 +10,7 @@
     </md-card-content>
 
     <md-card-actions>
-      <md-button class="md-icon-button" @click="likeQuote()">
+      <md-button class="md-icon-button" @click="likeQuote(quote['.key'])">
         <md-icon>favorite</md-icon>
       </md-button>
     </md-card-actions>
@@ -21,6 +21,11 @@
   export default {
     props: {
       quote: Object
+    },
+    methods: {
+      likeQuote (id) {
+        alert(id)
+      }
     }
   }
 </script>
