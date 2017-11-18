@@ -29,5 +29,6 @@
   .md-card {
     margin: 4px;
     display: inline-block;
+    min-width: 20%;
   }
 </style>

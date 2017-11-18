@@ -5,6 +5,10 @@
       :key="quote['.key']"
       :quote="quote"
     />
+
+    <md-button class="md-fab md-primary md-fab-bottom-right">
+      <md-icon>add</md-icon>
+    </md-button>
   </div>
 </template>
 

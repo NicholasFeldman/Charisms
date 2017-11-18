@@ -21,11 +21,6 @@
   </md-app>
 </template>
 
-<script>
-  export default {
-  }
-</script>
-
 <style lang="scss">
   @import "~vue-material/dist/theme/engine";
 
