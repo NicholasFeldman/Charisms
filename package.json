@@ -17,7 +17,8 @@
     "vue": "^2.5.2",
     "vue-material": "beta",
     "vue-router": "^3.0.1",
-    "vuefire": "^1.4.4"
+    "vuefire": "^1.4.4",
+    "vuelidate": "^0.6.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
