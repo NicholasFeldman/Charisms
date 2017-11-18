@@ -1,7 +1,7 @@
 <template>
   <div>
     <single-quote
-      v-for="quote in quotes"
+      v-for="quote in reverseQuotes"
       :key="quote['.key']"
       :quote="quote"
     />
@@ -30,10 +30,16 @@
     },
     firebase: {
       quotes: quotesRef
+        .orderByChild('date')
     },
     methods: {
       showDialog () {
         this.$refs['dialog'].show()
+      }
+    },
+    computed: {
+      reverseQuotes () {
+        return this.quotes.slice().reverse()
       }
     }
   }
