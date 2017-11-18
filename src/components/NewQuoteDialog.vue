@@ -102,7 +102,8 @@
         quotesRef.push({
           sayer: this.form.sayer,
           title: this.form.title,
-          quote: this.form.quote
+          quote: this.form.quote,
+          date: new Date().getTime()
         })
         this.cancel()
       }
