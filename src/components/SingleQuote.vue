@@ -35,5 +35,6 @@
     margin: 4px;
     display: inline-block;
     min-width: 20%;
+    max-width: 30%;
   }
 </style>
