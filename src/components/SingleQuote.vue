@@ -57,9 +57,8 @@
         quotesRef
           .child(this.quoteId)
           .child('likes')
-          .update({
-            [this.currentUser.uid]: false
-          })
+          .child(this.currentUser.uid)
+          .remove()
       },
       toggleLike () {
         if (this.isLiked()) {
