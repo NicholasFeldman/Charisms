@@ -8,7 +8,11 @@
 
     <new-quote-dialog ref="dialog"/>
 
-    <md-button class="md-fab md-primary md-fab-bottom-right" @click.native="showDialog()">
+    <md-button
+      v-if="currentUser"
+      class="md-fab md-primary md-fab-bottom-right"
+      @click.native="showDialog()"
+    >
       <md-icon>add</md-icon>
     </md-button>
   </div>
@@ -17,6 +21,8 @@
 <script>
   import db from '../firebase'
 
+  import AuthMixin from '../mixins/AuthMixin'
+
   import SingleQuote from './SingleQuote'
   import NewQuoteDialog from './NewQuoteDialog'
 
@@ -24,6 +30,7 @@
 
   export default {
     name: 'quotes-pane',
+    mixins: [AuthMixin],
     components: {
       SingleQuote,
       NewQuoteDialog

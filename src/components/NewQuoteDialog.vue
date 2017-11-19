@@ -44,11 +44,13 @@
   import { required, minLength } from 'vuelidate/lib/validators'
 
   import db from '../firebase'
+  import AuthMixin from '../mixins/AuthMixin'
 
   const quotesRef = db.ref('/quotes')
 
   export default {
     name: 'new-quote-dialog',
+    mixins: [AuthMixin],
     data: () => ({
       showDialog: false,
       form: {
@@ -103,6 +105,7 @@
           sayer: this.form.sayer,
           title: this.form.title,
           quote: this.form.quote,
+          submittedBy: this.currentUser.uid,
           date: new Date().getTime()
         })
         this.cancel()
