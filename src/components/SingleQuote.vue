@@ -10,7 +10,7 @@
     </md-card-content>
 
     <md-card-actions>
-      <md-button class="md-icon-button" @click="likeQuote(quote['.key'])">
+      <md-button class="md-icon-button" @click="likeQuote()">
         <md-icon>favorite</md-icon>
       </md-button>
     </md-card-actions>
@@ -18,13 +18,33 @@
 </template>
 
 <script>
+  import db from '../firebase'
+
+  import AuthMixin from '../mixins/AuthMixin'
+
+  const quotesRef = db.ref('quotes')
+
   export default {
+    mixins: [AuthMixin],
     props: {
       quote: Object
     },
     methods: {
-      likeQuote (id) {
-        alert(id)
+      likeQuote () {
+        quotesRef
+          .child(this.quote['.key'])
+          .child('likes')
+          .update({
+            [this.currentUser.uid]: true
+          })
+      },
+      unlikeQuote () {
+        quotesRef
+          .child(this.quote['.key'])
+          .child('likes')
+          .update({
+            [this.currentUser.uid]: false
+          })
       }
     }
   }
