@@ -10,8 +10,8 @@
     </md-card-content>
 
     <md-card-actions>
-      <md-button class="md-icon-button" @click="likeQuote()">
-        <md-icon>favorite</md-icon>
+      <md-button class="md-icon-button" @click="toggleLike()">
+        <md-icon :class="getLikedClass">favorite</md-icon>
       </md-button>
     </md-card-actions>
   </md-card>
@@ -29,10 +29,25 @@
     props: {
       quote: Object
     },
+    data () {
+      return {
+        quoteId: this.quote['.key']
+      }
+    },
+    firebase () {
+      return {
+        likes: {
+          source: quotesRef
+            .child(this.quoteId)
+            .child('likes'),
+          asObject: true
+        }
+      }
+    },
     methods: {
       likeQuote () {
         quotesRef
-          .child(this.quote['.key'])
+          .child(this.quoteId)
           .child('likes')
           .update({
             [this.currentUser.uid]: true
@@ -40,11 +55,28 @@
       },
       unlikeQuote () {
         quotesRef
-          .child(this.quote['.key'])
+          .child(this.quoteId)
           .child('likes')
           .update({
             [this.currentUser.uid]: false
           })
+      },
+      toggleLike () {
+        if (this.isLiked()) {
+          this.unlikeQuote()
+        } else {
+          this.likeQuote()
+        }
+      },
+      isLiked () {
+        return this.currentUser && this.likes[this.currentUser.uid]
+      }
+    },
+    computed: {
+      getLikedClass () {
+        return {
+          'liked-quote': this.isLiked()
+        }
       }
     }
   }
@@ -56,5 +88,9 @@
     display: inline-block;
     min-width: 20%;
     max-width: 30%;
+  }
+
+  .liked-quote {
+    color: red !important;
   }
 </style>
