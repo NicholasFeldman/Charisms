@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "quotes": {
+      ".read": true,
+      "$qid": {
+        ".write": "auth != null && (!data.exists() || data.child('submittedBy').val() == auth.uid)"
+      }
+    }
+  }
+}
