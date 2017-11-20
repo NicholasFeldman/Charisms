@@ -10,7 +10,7 @@
 
     <md-button
       v-if="currentUser"
-      class="md-fab md-primary md-fab-bottom-right"
+      class="md-fab md-primary md-fab-top-right"
       @click.native="showDialog()"
     >
       <md-icon>add</md-icon>
