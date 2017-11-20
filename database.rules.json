@@ -5,7 +5,12 @@
     "quotes": {
       ".read": true,
       "$qid": {
-        ".write": "auth != null && (!data.exists() || data.child('submittedBy').val() == auth.uid)"
+        ".write": "auth != null && (!data.exists() || data.child('submittedBy').val() == auth.uid)",
+        "likes": {
+          "$lid": {
+            ".write": "auth != null && $lid == auth.uid"
+          }
+        }
       }
     }
   }
