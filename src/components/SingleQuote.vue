@@ -10,7 +10,10 @@
     </md-card-content>
 
     <md-card-actions>
-      <md-button class="md-icon-button" @click="toggleLike()">
+      <md-button
+        v-if="currentUser"
+        class="md-icon-button"
+        @click="toggleLike()">
         <md-icon :class="getLikedClass">favorite</md-icon>
       </md-button>
     </md-card-actions>
