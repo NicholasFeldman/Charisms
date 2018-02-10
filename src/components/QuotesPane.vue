@@ -8,13 +8,16 @@
 
     <new-quote-dialog ref="dialog"/>
 
-    <md-button
-      v-if="currentUser"
-      class="md-fab md-primary md-fab-top-right"
-      @click.native="showDialog()"
-    >
-      <md-icon>add</md-icon>
-    </md-button>
+    <v-fab-transition>
+      <v-btn
+        fab bottom right fixed
+        v-show="currentUser"
+        color="primary"
+        @click.native="showDialog()"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </div>
 </template>
 
