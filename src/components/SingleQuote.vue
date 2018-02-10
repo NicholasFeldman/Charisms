@@ -1,23 +1,24 @@
 <template>
-  <md-card>
-    <md-card-header>
-      <div class="md-title">{{quote.sayer}}</div>
-      <div class="md-subhead">{{quote.title}}</div>
-    </md-card-header>
+  <v-card>
+    <v-card-title primary-title>
+      <h3 class="headline mb-0">{{quote.sayer}}</h3><br>
+      <h3 class="subheader mb-1">{{quote.title}}</h3>
+    </v-card-title>
 
-    <md-card-content>
+    <v-card-text>
       {{quote.quote}}
-    </md-card-content>
+    </v-card-text>
 
-    <md-card-actions>
-      <md-button
-        v-if="currentUser"
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn icon
+        v-show="currentUser"
         class="md-icon-button"
         @click="toggleLike()">
-        <md-icon :class="getLikedClass">favorite</md-icon>
-      </md-button>
-    </md-card-actions>
-  </md-card>
+        <v-icon :class="getLikedClass">favorite</v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
