@@ -2,9 +2,9 @@
   <v-app>
 
     <v-toolbar app color="primary">
-      <v-toolbar-side-icon  @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon dark @click.stop="drawer = !drawer"/>
 
-      <v-spacer></v-spacer>
+      <v-spacer/>
 
       <v-btn
         v-if="!currentUser"
