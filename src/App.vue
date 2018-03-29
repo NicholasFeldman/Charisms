@@ -1,58 +1,64 @@
 <template>
-  <md-app>
+  <v-app>
 
-    <md-app-toolbar class="md-primary">
-      <div class="md-toolbar-section-start">
-        <span class="md-title">Charisms</span>
-      </div>
+    <v-toolbar app color="primary">
+      <v-toolbar-side-icon dark @click.stop="drawer = !drawer"/>
 
-      <div class="md-toolbar-section-end">
-        <md-button
-          v-if="!currentUser"
-          class="md-primary"
-          @click="signIn()"
-        >Log in</md-button>
+      <v-spacer/>
 
-        <md-button
-          v-if="currentUser"
-          class="md-primary"
-          @click="signOut()"
-        >Log Out</md-button>
-      </div>
+      <template v-if="currentUser">
+        <v-menu>
+          <v-btn dark icon slot="activator">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile @click="signOut()">
+              <v-list-tile-title>Log Out</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </template>
+      <template v-else>
+        <v-btn color="primary" depressed @click="signIn()">Log In</v-btn>
+      </template>
+    </v-toolbar>
 
-    </md-app-toolbar>
+    <v-navigation-drawer app fixed v-model="drawer">
+      <v-toolbar flat>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-title class="title">
+              Charisms
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+      <v-list>
+        <v-list-tile to="/">
+          <v-list-tile-action>
+            <v-icon>list</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Quotes</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
 
-    <md-app-drawer md-permanent="clipped">
-      <md-list>
-        <md-list-item to="/">
-          <md-icon>list</md-icon>
-          <span class="md-list-item-text">Quotes</span>
-        </md-list-item>
-      </md-list>
-    </md-app-drawer>
-
-    <md-app-content>
+    <v-content>
       <router-view/>
-    </md-app-content>
+    </v-content>
 
-  </md-app>
+  </v-app>
 </template>
 
 <script>
   import AuthMixin from './mixins/AuthMixin'
 
   export default {
-    mixins: [AuthMixin]
+    mixins: [AuthMixin],
+    data: () => ({
+      drawer: null,
+    })
   }
 </script>
-
-<style lang="scss">
-  @import "~vue-material/dist/theme/engine";
-
-  @include md-register-theme("default", (
-    primary: md-get-palette-color(blue, A200),
-    accent: md-get-palette-color(red, A200)
-  ));
-
-  @import "~vue-material/dist/theme/all";
-</style>

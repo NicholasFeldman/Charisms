@@ -1,20 +1,28 @@
 <template>
   <div>
-    <single-quote
-      v-for="quote in reverseQuotes"
-      :key="quote['.key']"
-      :quote="quote"
-    />
+    <v-container fluid grid-list-md>
+      <v-layout row wrap>
+        <v-flex v-for="quote in reverseQuotes" :key="quote['.key']">
+          <single-quote
+            :quote="quote"
+            style="max-width: 400px"
+          />
+        </v-flex>
+      </v-layout>
+    </v-container>
 
     <new-quote-dialog ref="dialog"/>
 
-    <md-button
-      v-if="currentUser"
-      class="md-fab md-primary md-fab-top-right"
-      @click.native="showDialog()"
-    >
-      <md-icon>add</md-icon>
-    </md-button>
+    <v-fab-transition>
+      <v-btn
+        fab bottom right fixed
+        v-show="currentUser"
+        color="primary"
+        @click.native="showDialog()"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </div>
 </template>
 

@@ -1,48 +1,44 @@
 <template>
-    <md-dialog
-      :md-active.sync="showDialog"
-      :md-close-on-esc="false"
-      :md-click-outside-to-close="false"
+    <v-dialog
+      v-model="dialog"
     >
+      <v-card>
+        <v-card-title>
+          <span class="headline">Submit a Quote</span>
+        </v-card-title>
 
-      <md-dialog-title>Submit a Quote</md-dialog-title>
+        <v-card-text>
+          <v-form v-model="form.valid" ref="form" lazy-validation>
+            <v-text-field
+              label="Sayer"
+              v-model="form.sayer"
+              required
+              :rules="form.rules.sayer"
+            />
+            <v-text-field
+              label="Title"
+              v-model="form.title"
+              :rules="form.rules.title"
+            />
+            <v-text-field
+              label="Quote"
+              v-model="form.quote"
+              required
+              :rules="form.rules.quote"
+            />
+          </v-form>
+        </v-card-text>
 
-      <md-dialog-content>
-
-          <md-field :class="getValidationClass('sayer')">
-            <label>Sayer</label>
-            <md-input v-model="form.sayer"></md-input>
-            <span class="md-error" v-if="!$v.form.sayer.required"> This field is required</span>
-            <span class="md-error" v-if="!$v.form.sayer.minLength"> This field is too short</span>
-          </md-field>
-
-          <md-field :class="getValidationClass('title')">
-            <label>Title</label>
-            <md-input v-model="form.title"></md-input>
-            <span class="md-error" v-if="!$v.form.title.required"> This field is required</span>
-            <span class="md-error" v-if="!$v.form.title.minLength"> This field is too short</span>
-
-          </md-field>
-
-          <md-field :class="getValidationClass('quote')">
-            <label>Quote</label>
-            <md-input v-model="form.quote"></md-input>
-            <span class="md-error" v-if="!$v.form.quote.required"> This field is required</span>
-            <span class="md-error" v-if="!$v.form.quote.minLength"> This field is too short</span>
-          </md-field>
-
-      </md-dialog-content>
-
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="cancel()">Cancel</md-button>
-        <md-button class="md-primary" @click="validateForm()">Submit</md-button>
-      </md-dialog-actions>
-    </md-dialog>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn color="primary" flat @click.native="cancel">Cancel</v-btn>
+          <v-btn color="primary" flat @click.native="submit">Submit</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 </template>
 
 <script>
-  import { required, minLength } from 'vuelidate/lib/validators'
-
   import db from '../firebase'
   import AuthMixin from '../mixins/AuthMixin'
 
@@ -52,63 +48,40 @@
     name: 'new-quote-dialog',
     mixins: [AuthMixin],
     data: () => ({
-      showDialog: false,
+      dialog: false,
       form: {
+        valid: true,
         sayer: null,
         title: null,
-        quote: null
-      }
-    }),
-    validations: {
-      form: {
-        sayer: {
-          required,
-          minLength: minLength(3)
-        },
-        title: {
-          required,
-          minLength: minLength(3)
-        },
-        quote: {
-          required,
-          minLength: minLength(5)
+        quote: null,
+        rules: {
+          sayer: [v => !!v || 'Sayer is required'],
+          title: [],
+          quote: [v => !!v || 'Quote is required']
         }
       }
-    },
+    }),
     methods: {
       show () {
-        this.showDialog = true
+        this.dialog = true
       },
       cancel () {
-        this.$v.$reset()
         this.form.sayer = null
         this.form.title = null
         this.form.quote = null
-        this.showDialog = false
-      },
-      getValidationClass (fieldName) {
-        const field = this.$v.form[fieldName]
-        if (field) {
-          return {
-            'md-invalid': field.$invalid && field.$dirty
-          }
-        }
-      },
-      validateForm () {
-        this.$v.$touch()
-        if (!this.$v.$invalid) {
-          this.submit()
-        }
+        this.dialog = false
       },
       submit () {
-        quotesRef.push({
-          sayer: this.form.sayer,
-          title: this.form.title,
-          quote: this.form.quote,
-          submittedBy: this.currentUser.uid,
-          date: new Date().getTime()
-        })
-        this.cancel()
+        if (this.$refs.form.validate()) {
+          quotesRef.push({
+            sayer: this.form.sayer,
+            title: this.form.title,
+            quote: this.form.quote,
+            submittedBy: this.currentUser.uid,
+            date: new Date().getTime()
+          })
+          this.cancel()
+        }
       }
     }
   }

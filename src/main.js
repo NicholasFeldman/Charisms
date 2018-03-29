@@ -1,10 +1,8 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import VueFire from 'vuefire'
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 import Vuelidate from 'vuelidate'
 
@@ -14,14 +12,11 @@ import router from './router'
 Vue.config.productionTip = false
 
 Vue.use(VueFire)
-Vue.use(VueMaterial)
+Vue.use(Vuetify)
 
 Vue.use(Vuelidate)
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
-  template: '<App/>',
-  components: { App }
-})
+  render: (h) => h(App),
+}).$mount('#app')
