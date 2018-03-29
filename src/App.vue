@@ -6,15 +6,21 @@
 
       <v-spacer/>
 
-      <v-btn
-        v-if="!currentUser"
-        @click="signIn()"
-      >Log in</v-btn>
-
-      <v-btn
-        v-if="currentUser"
-        @click="signOut()"
-      >Log Out</v-btn>
+      <template v-if="currentUser">
+        <v-menu>
+          <v-btn dark icon slot="activator">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile @click="signOut()">
+              <v-list-tile-title>Log Out</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </template>
+      <template v-else>
+        <v-btn primary depressed @click="signIn()">Log In</v-btn>
+      </template>
     </v-toolbar>
 
     <v-navigation-drawer app fixed v-model="drawer">
