@@ -19,7 +19,7 @@
         </v-menu>
       </template>
       <template v-else>
-        <v-btn primary depressed @click="signIn()">Log In</v-btn>
+        <v-btn color="primary" depressed @click="signIn()">Log In</v-btn>
       </template>
     </v-toolbar>
 

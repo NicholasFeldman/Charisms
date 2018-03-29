@@ -31,8 +31,8 @@
 
         <v-card-actions>
           <v-spacer/>
-          <v-btn primary flat @click.native="cancel">Cancel</v-btn>
-          <v-btn primary flat @click.native="submit">Submit</v-btn>
+          <v-btn color="primary" flat @click.native="cancel">Cancel</v-btn>
+          <v-btn color="primary" flat @click.native="submit">Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
