@@ -10,8 +10,8 @@ import tech.feldman.charisms.backend.repository.QuoteRepository
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api/quotes")
-@Api("/api/quotes")
+@RequestMapping("/quotes")
+@Api("/quotes")
 class QuoteController(private val repository: QuoteRepository) {
 
     @GetMapping
